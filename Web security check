@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Security Check</title>
+</head>
+
+<body>
+    <h1>Security Checks</h1>
+    <input type="text" id="Check" placeholder="Enter the userinput">
+    <button onclick="checkinput()">Submit</button>
+
+    <h2 id="h2"></h2>
+</body>
+<script>
+    function checkinput() {
+        let input = document.getElementById("Check").value;
+        if (input.includes("<script>")|| input.includes("<") ||input.includes(">")) {
+            document.getElementById("h2").innerHTML = "invalid input";
+        } else {
+            document.getElementById("h2").innerHTML = "valid input";
+        }
+    }
+
+</script>
