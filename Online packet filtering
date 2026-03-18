@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <string.h>
+
+int main() {
+    char ip[50];
+    int port;
+
+    // blocked IP list
+    char blockedIPs[][20] = {
+        "192.168.1.10",
+        "10.0.0.1"
+    };
+
+    int n = 2;  // number of blocked IPs
+
+    while(1) {
+        printf("\nEnter Source IP (or type exit): ");
+        scanf("%s", ip);
+
+        if(strcmp(ip, "exit") == 0)
+            break;
+
+        printf("Enter Port Number: ");
+        scanf("%d", &port);
+
+        int blocked = 0;
+
+        // check IP
+        for(int i = 0; i < n; i++) {
+            if(strcmp(ip, blockedIPs[i]) == 0) {
+                blocked = 1;
+                break;
+            }
+        }
+
+        // check port (example: block port 80)
+        if(port == 80) {
+            blocked = 1;
+        }
+
+        if(blocked) {
+            printf("❌ Packet Blocked\n");
+        } else {
+            printf("✅ Packet Allowed\n");
+        }
+    }
+
+    return 0;
+}
