@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<string.h>
+
+struct user
+{
+    char name[20];
+    char role[10];
+};
+
+struct user u[] = {
+    {"aadi","admin"},
+    {"vp","user"},
+    {"vis","guest"}
+};
+
+int main()
+{
+    char name[20], op[10];
+    int i, found = 0;
+
+    printf("Enter name: ");
+    scanf("%s", name);
+
+    for(i=0; i<3; i++)
+    {
+        if(strcmp(name, u[i].name)==0)
+        {
+            found = 1;
+
+            printf("Enter operation (read/write/execute): ");
+            scanf("%s", op);
+
+            if(strcmp(u[i].role,"admin")==0)
+                printf("Access granted");
+
+            else if(strcmp(u[i].role,"user")==0 &&
+                   (strcmp(op,"read")==0 || strcmp(op,"write")==0))
+                printf("Access granted");
+
+            else if(strcmp(u[i].role,"guest")==0 &&
+                    strcmp(op,"read")==0)
+                printf("Access granted");
+
+            else
+                printf("Access denied");
+
+            break;
+        }
+    }
+
+    if(!found)
+        printf("User not found");
+
+    return 0;
+}
